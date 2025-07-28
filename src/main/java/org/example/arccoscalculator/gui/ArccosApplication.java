@@ -16,7 +16,6 @@ public class ArccosApplication extends Application {
         stage.setTitle("Arccos Calculator");
         stage.setScene(scene);
 
-        // Delay showing the window slightly
         Platform.runLater(stage::show);
     }
 
