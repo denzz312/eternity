@@ -8,39 +8,49 @@
       spacing="16" alignment="TOP_CENTER" stylesheets="@styles.css">
     <padding><Insets top="24" right="24" bottom="24" left="24"/></padding>
 
-    <Label text="Arccos Calculator" styleClass="title"/>
+    <Label text="Arccos Calculator" styleClass="title"
+           accessibleText="Arccos Calculator application title"/>
 
     <GridPane hgap="12" vgap="10">
         <columnConstraints>
             <ColumnConstraints halignment="RIGHT" minWidth="120"/>
-            <ColumnConstraints halignment="LEFT" minWidth="240" hgrow="ALWAYS"/>
+            <ColumnConstraints halignment="LEFT" minWidth="260" hgrow="ALWAYS"/>
         </columnConstraints>
 
+        <!-- Input -->
         <Label text="x value (−1 to 1):" GridPane.rowIndex="0" GridPane.columnIndex="0"
-               labelFor="$inputField"/>
+               labelFor="$inputField" accessibleText="Label for x value input"/>
         <TextField fx:id="inputField" GridPane.rowIndex="0" GridPane.columnIndex="1"
                    promptText="e.g., 0.5"
                    accessibleText="Enter a number between minus one and one"/>
 
-        <Label text="Units:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <!-- Units (explicit) -->
+        <Label text="Units:" GridPane.rowIndex="1" GridPane.columnIndex="0"
+               accessibleText="Label for result units"/>
         <Label text="Radians" GridPane.rowIndex="1" GridPane.columnIndex="1"
-               styleClass="hint"/>
+               styleClass="hint" accessibleText="Result is displayed in radians"/>
 
-        <HBox spacing="10" alignment="CENTER_LEFT" GridPane.rowIndex="2" GridPane.columnIndex="1">
+        <!-- Actions -->
+        <HBox spacing="10" alignment="CENTER_LEFT"
+              GridPane.rowIndex="2" GridPane.columnIndex="1">
             <Button fx:id="calcBtn" text="_Calculate" mnemonicParsing="true"
-                    onAction="#onCalculateClick" defaultButton="true"
+                    defaultButton="true" onAction="#onCalculateClick"
                     accessibleText="Calculate arccos of x"/>
-            <Button text="C_lear" mnemonicParsing="true" onAction="#onClear"
-                    cancelButton="true" accessibleText="Clear input and result"/>
-            <Hyperlink text="Help" onAction="#onHelp"/>
+            <Button text="C_lear" mnemonicParsing="true" cancelButton="true"
+                    onAction="#onClear" accessibleText="Clear input and result"/>
+            <Hyperlink text="Help" onAction="#onHelp"
+                       accessibleText="Open help dialog"/>
         </HBox>
 
-        <Label text="Result:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+        <!-- Result -->
+        <Label text="Result:" GridPane.rowIndex="3" GridPane.columnIndex="0"
+               accessibleText="Label for result value"/>
         <Label fx:id="resultLabel" GridPane.rowIndex="3" GridPane.columnIndex="1"
                styleClass="result" textOverrun="LEADING_ELLIPSIS"
-               accessibleText="Calculation result in radians"/>
+               accessibleText="Calculated result value in radians"/>
     </GridPane>
 
-    <Label fx:id="messageLabel" styleClass="status" wrapText="true" maxWidth="480"
-           accessibleText="Status message such as errors or hints"/>
+    <!-- Status message (errors/success). Changing text makes screen readers announce it. -->
+    <Label fx:id="messageLabel" styleClass="status" wrapText="true" maxWidth="520"
+           accessibleText="Status message area"/>
 </VBox>

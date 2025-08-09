@@ -19,36 +19,11 @@ public class ArccosController {
 
   @FXML
   public void initialize() {
+    // Informative tooltip (visible help)
     inputField.setTooltip(new Tooltip("Enter a number between -1 and 1 inclusive"));
 
-    // Allow typing freely; show/clear message based on validity (don't block edits)
-    StringConverter<Double> conv = new DoubleStringConverter();
-    TextFormatter<Double> tf = new TextFormatter<>(conv, null, change -> {
-      String s = change.getControlNewText().trim();
-
-      // allow intermediate states while typing
-      if (s.isEmpty() || s.equals("-") || s.equals(".") || s.equals("-.")) {
-        clearStatus();
-        return change;
-      }
-
-      try {
-        double val = Double.parseDouble(s);
-        if (val < MIN || val > MAX) {
-          showError("Value out of range. Enter a number between -1 and 1.");
-        } else {
-          clearStatus();
-        }
-      } catch (NumberFormatException ex) {
-        showError("Invalid number. Try examples like 0.5, -0.2, or 1.");
-      }
-      return change; // never block; just show status
-    });
-    inputField.setTextFormatter(tf);
-
-    // Disable Calculate unless input parses AND is within [-1, 1]
     calcBtn.disableProperty().bind(
-            Bindings.createBooleanBinding(() -> {
+            javafx.beans.binding.Bindings.createBooleanBinding(() -> {
               String t = inputField.getText() == null ? "" : inputField.getText().trim();
               if (t.isEmpty() || t.equals("-") || t.equals(".") || t.equals("-.")) return true;
               try {
@@ -59,6 +34,17 @@ public class ArccosController {
               }
             }, inputField.textProperty())
     );
+
+    // Keyboard accelerator: Ctrl/Cmd + Enter triggers Calculate
+    inputField.sceneProperty().addListener((obs, oldScene, scene) -> {
+      if (scene == null) return;
+      scene.getAccelerators().put(
+              new javafx.scene.input.KeyCodeCombination(
+                      javafx.scene.input.KeyCode.ENTER,
+                      javafx.scene.input.KeyCombination.SHORTCUT_DOWN),
+              this::onCalculateClick
+      );
+    });
   }
 
   @FXML
@@ -105,7 +91,7 @@ public class ArccosController {
   }
 
   private void showError(String msg) {
-    messageLabel.setText(msg);
+    messageLabel.setText(msg);                    // text changes are announced
     messageLabel.getStyleClass().removeAll("ok");
     if (!messageLabel.getStyleClass().contains("error")) {
       messageLabel.getStyleClass().add("error");
@@ -122,6 +108,6 @@ public class ArccosController {
 
   private void clearStatus() {
     messageLabel.setText("");
-    messageLabel.getStyleClass().removeAll("error", "ok");
+    messageLabel.getStyleClass().removeAll("error","ok");
   }
 }
