@@ -1,0 +1,28 @@
+.title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.hint {
+    -fx-text-fill: #666666;
+    -fx-font-size: 11px;
+}
+
+.result {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1f2d3d;
+}
+
+.status {
+    -fx-font-size: 12px;
+    -fx-padding: 6 0 0 0;
+}
+
+.status.error {
+    -fx-text-fill: #C0392B; /* strong contrast red */
+}
+
+.status.ok {
+    -fx-text-fill: #2E7D32; /* accessible green */
+}

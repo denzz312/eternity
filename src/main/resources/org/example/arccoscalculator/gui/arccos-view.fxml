@@ -1,17 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
+<?import javafx.geometry.*?>
 
-<VBox alignment="CENTER" spacing="15.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.example.arccoscalculator.gui.ArccosController">
-    <padding>
-        <Insets top="20" right="20" bottom="20" left="20"/>
-    </padding>
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.example.arccoscalculator.gui.ArccosController"
+      spacing="16" alignment="TOP_CENTER" stylesheets="@styles.css">
+    <padding><Insets top="24" right="24" bottom="24" left="24"/></padding>
 
-    <Label text="Enter a value between -1 and 1:"/>
-    <TextField fx:id="inputField" promptText="e.g., 0.5"/>
-    <Button text="Calculate Arccos" onAction="#onCalculateClick"/>
-    <Label fx:id="resultLabel" style="-fx-font-size: 14px;" textFill="black"/>
+    <Label text="Arccos Calculator" styleClass="title"/>
+
+    <GridPane hgap="12" vgap="10">
+        <columnConstraints>
+            <ColumnConstraints halignment="RIGHT" minWidth="120"/>
+            <ColumnConstraints halignment="LEFT" minWidth="240" hgrow="ALWAYS"/>
+        </columnConstraints>
+
+        <Label text="x value (−1 to 1):" GridPane.rowIndex="0" GridPane.columnIndex="0"
+               labelFor="$inputField"/>
+        <TextField fx:id="inputField" GridPane.rowIndex="0" GridPane.columnIndex="1"
+                   promptText="e.g., 0.5"
+                   accessibleText="Enter a number between minus one and one"/>
+
+        <Label text="Units:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <Label text="Radians" GridPane.rowIndex="1" GridPane.columnIndex="1"
+               styleClass="hint"/>
+
+        <HBox spacing="10" alignment="CENTER_LEFT" GridPane.rowIndex="2" GridPane.columnIndex="1">
+            <Button fx:id="calcBtn" text="_Calculate" mnemonicParsing="true"
+                    onAction="#onCalculateClick" defaultButton="true"
+                    accessibleText="Calculate arccos of x"/>
+            <Button text="C_lear" mnemonicParsing="true" onAction="#onClear"
+                    cancelButton="true" accessibleText="Clear input and result"/>
+            <Hyperlink text="Help" onAction="#onHelp"/>
+        </HBox>
+
+        <Label text="Result:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+        <Label fx:id="resultLabel" GridPane.rowIndex="3" GridPane.columnIndex="1"
+               styleClass="result" textOverrun="LEADING_ELLIPSIS"
+               accessibleText="Calculation result in radians"/>
+    </GridPane>
+
+    <Label fx:id="messageLabel" styleClass="status" wrapText="true" maxWidth="480"
+           accessibleText="Status message such as errors or hints"/>
 </VBox>
