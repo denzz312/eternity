@@ -6,10 +6,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable;
 import org.testfx.framework.junit5.ApplicationTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@DisabledIfEnvironmentVariable(named = "GITHUB_ACTIONS", matches = "true") // skip on CI
+@Timeout(15)
 class ArccosControllerTest extends ApplicationTest {
 
     private ArccosController controller;
