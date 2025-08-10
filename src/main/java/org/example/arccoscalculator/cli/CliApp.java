@@ -43,6 +43,11 @@ public class CliApp implements Callable<Integer> {
         break;
       }
 
+      if (!scanner.hasNextLine()) {
+        System.out.println("\n(No input detected. Exiting interactive mode.)");
+        break;
+      }
+
       try {
         double value = Double.parseDouble(input);
         processInput(value);

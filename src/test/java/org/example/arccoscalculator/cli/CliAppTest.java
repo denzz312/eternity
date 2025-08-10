@@ -3,12 +3,11 @@ package org.example.arccoscalculator.cli;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.*;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+
+import org.junit.jupiter.api.*;
 import picocli.CommandLine;
 
+@Timeout(10)
 class CliAppTest {
 
     private PrintStream originalOut;

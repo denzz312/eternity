@@ -22,7 +22,7 @@ jobs:
 
       # Build + unit tests (Surefire) + JaCoCo report (HTML + XML)
       - name: Build and test
-        run: mvn -B -q clean verify
+        run: mvn -B clean verify
 
       # Publish a JUnit test report as a Check on the commit
       - name: Publish JUnit report
