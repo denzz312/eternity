@@ -11,7 +11,7 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.2.5</version>
         <configuration>
-          <argLine>--add-exports=javafx.graphics/com.sun.javafx.application=ALL-UNNAMED</argLine>
+          <argLine>${jacoco.agent.argLine} --add-exports=javafx.graphics/com.sun.javafx.application=ALL-UNNAMED</argLine>
         </configuration>
       </plugin>
       <plugin>
@@ -31,20 +31,16 @@
             <goals>
               <goal>prepare-agent</goal>
             </goals>
+            <configuration>
+              <propertyName>jacoco.agent.argLine</propertyName>
+            </configuration>
           </execution>
           <execution>
             <id>report</id>
-            <phase>verify</phase>
+            <phase>prepare-package</phase>
             <goals>
               <goal>report</goal>
             </goals>
-            <configuration>
-              <outputDirectory>${project.build.directory}/site/jacoco</outputDirectory>
-              <formats>
-                <format>HTML</format>
-                <format>XML</format>
-              </formats>
-            </configuration>
           </execution>
         </executions>
       </plugin>
