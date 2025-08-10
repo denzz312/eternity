@@ -1,18 +1,19 @@
 package org.example.arccoscalculator.gui;
 
-import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.util.StringConverter;
-import javafx.util.converter.DoubleStringConverter;
 import org.example.arccoscalculator.core.ArccosCalculator;
 
 public class ArccosController {
 
-  @FXML private TextField inputField;
-  @FXML private Button calcBtn;
-  @FXML private Label resultLabel;
-  @FXML private Label messageLabel;
+  @FXML
+  public TextField inputField;
+  @FXML
+  public Button calcBtn;
+  @FXML
+  public Label resultLabel;
+  @FXML
+  public Label messageLabel;
 
   private static final double MIN = -1.0;
   private static final double MAX =  1.0;

@@ -3,7 +3,7 @@ package org.example.arccoscalculator.core;
 public class ArccosCalculator {
 
   private static final double PI = 3.1415926535;
-  private static final int TERMS = 25; // Number of terms in the Taylor series for arcsin
+  private static final int TERMS = 50; // Number of terms in the Taylor series for arcsin
 
   public static boolean isValidInput(double x) {
     return x >= -1.0 && x <= 1.0;
@@ -16,6 +16,9 @@ public class ArccosCalculator {
    * @return arccos(x) in radians
    */
   public static double compute(double x) {
+    if (!isValidInput(x)) {
+      throw new IllegalArgumentException("x must be in [-1, 1], was " + x);
+    }
     return PI / 2 - arcsin(x);
   }
 

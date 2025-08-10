@@ -29,7 +29,7 @@ public class CliApp implements Callable<Integer> {
     return 0;
   }
 
-  private void interactiveMode() {
+  public void interactiveMode() {
     Scanner scanner = new Scanner(System.in);
     System.out.println("\n🧮 Welcome to the Arccos Calculator CLI!");
     System.out.println("Enter a value between -1 and 1 (type 'exit' to quit):\n");
@@ -52,7 +52,7 @@ public class CliApp implements Callable<Integer> {
     }
   }
 
-  private void processInput(double value) {
+  public void processInput(double value) {
     if (!ArccosCalculator.isValidInput(value)) {
       System.out.println("Value must be between -1 and 1.\n");
       return;
